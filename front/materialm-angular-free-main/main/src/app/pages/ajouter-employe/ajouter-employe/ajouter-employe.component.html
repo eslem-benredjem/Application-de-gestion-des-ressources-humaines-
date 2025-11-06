@@ -1,0 +1,131 @@
+<mat-card class="cardWithShadow theme-card">
+    <mat-card-header>
+      <mat-card-title class="m-b-0">{{ isModifay ? 'Modifier ' : 'Ajouter' }} Employe</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+      <form [formGroup]="employeForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">CIN</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="text" class="form-control" formControlName="cin" placeholder="CIN"/>
+              <mat-error *ngIf="f['cin'].invalid && f['cin'].touched">
+                Le CIN est requis et doit comporter 8 chiffres.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">Nom</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="text" class="form-control" formControlName="nom" placeholder="Nom"/>
+              <mat-error *ngIf="f['nom'].invalid && f['nom'].touched">
+                Le nom est requis et doit comporter au moins 2 caractères.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">Prenom</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="text" class="form-control" formControlName="prenom" placeholder="Prénom"/>
+              <mat-error *ngIf="f['prenom'].invalid && f['prenom'].touched">
+                Le prénom est requis et doit comporter au moins 2 caractères.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">Genre</mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select class="form-control" formControlName="genre" placeholder="Genre">
+                <mat-option value="Femme">Femme</mat-option>
+                <mat-option value="Homme">Homme</mat-option>
+              </mat-select>
+              <mat-error *ngIf="f['genre'].invalid && f['genre'].touched">
+                Le genre est requis.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">Date de naissance</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="date" formControlName="dateNaissance" />
+              <mat-error *ngIf="f['dateNaissance'].invalid && f['dateNaissance'].touched">
+                La date de naissance est requise.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">Adresse</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="text" class="form-control" formControlName="adresse" placeholder="Adresse" />
+              <mat-error *ngIf="f['adresse'].invalid && f['adresse'].touched">
+                L'adresse est requise.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">Numéro de téléphon</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="text" class="form-control" formControlName="telephone" placeholder="Téléphone" />
+              <mat-error *ngIf="f['telephone'].invalid && f['telephone'].touched">
+                Le numéro de téléphone est requis et doit être valide.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">Email</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="email" class="form-control" formControlName="email" placeholder="Email" />
+              <mat-error *ngIf="f['email'].invalid && f['email'].touched">
+                L'email est requis et doit être valide.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">Date d'embauche</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="date" class="form-control" formControlName="dateEmbauche" />
+              <mat-error *ngIf="f['dateEmbauche'].invalid && f['dateEmbauche'].touched">
+                La date d'embauche est requise.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">Role</mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select class="form-control" formControlName="role" placeholder="Role">
+                <mat-option value="RESPONSABLE">Responsable</mat-option>
+                <mat-option value="EMPLOYE">Employé</mat-option>
+              </mat-select>
+              <mat-error *ngIf="f['role'].invalid && f['role'].touched">
+                Le rôle est requis.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="f-w-600 m-b-8 d-block">Groupe</mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-select id="groupId" formControlName="groupId" class="form-control">
+                <mat-option *ngFor="let group of groups" [value]="group.id">
+                  {{ group.name }}
+                </mat-option>              
+              </mat-select>
+            </mat-form-field>            
+          </div>
+          <div class="col-lg-6" *ngIf="!isModifay">
+            <mat-label class="f-w-600 m-b-8 d-block">Mot de passe</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="password" class="form-control" formControlName="password" placeholder="Mot de passe" />
+              <mat-error *ngIf="f['password'].invalid && f['password'].touched">
+                Le mot de passe est requis et doit comporter au moins 6 caractères.
+              </mat-error>
+            </mat-form-field>
+          </div>        
+        </div>
+        <div class="m-t-12">
+          <button mat-flat-button color="primary" class="m-r-8">{{ isModifay ? 'Enregistrer ' : 'Ajouter' }}</button>
+          <button mat-stroked-button color="warn" (click)="annuler()">Annuler</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  

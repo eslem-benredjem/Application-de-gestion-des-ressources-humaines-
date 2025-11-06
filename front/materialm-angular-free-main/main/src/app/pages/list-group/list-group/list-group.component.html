@@ -1,0 +1,100 @@
+<mat-card class="cardWithShadow theme-card">
+      <mat-card-header>
+        <mat-card-title class="m-b-0">Liste des Groupes</mat-card-title>
+      <div style="display: flex; justify-content: flex-end; margin-left: 850px;">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="toggleForm()">
+            <span>Ajouter un Groupe</span>
+          </button>
+        </mat-menu>
+      </div>
+    </mat-card-header>  
+      <mat-card-content class="b-t-1">
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource" class="w-100">
+  
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">ID</th>
+            <td mat-cell *matCellDef="let group">{{ group.id }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Nom du groupe</th>
+            <td mat-cell *matCellDef="let group">{{ group.nom }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="nomSupervisor">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Nom du superviseur</th>
+            <td mat-cell *matCellDef="let group">{{ group.nomSupervisor }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14"></th>
+            <td mat-cell *matCellDef="let group">
+              <button mat-icon-button color="primary" (click)="editGroup(group)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="confirmDelete(group.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
+  <!-- Formulaire d'ajout/modification -->
+  <mat-card *ngIf="showForm" class="cardWithShadow theme-card">
+    <mat-card-header>
+      <mat-card-title class="m-b-0">{{ groupId ? 'Modifier' : 'Ajouter' }} un Groupe</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+  
+      <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+        <div style="margin-bottom: 20px;">
+            <mat-label class="f-w-600 m-b-8 d-block">Nom du Groupe</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="text" formControlName="groupName"/>
+            
+            <mat-error *ngIf="groupForm.get('groupName')?.invalid">
+              <span *ngIf="groupForm.get('groupName')?.hasError('required')">Le nom du groupe est obligatoire.</span>
+              <span *ngIf="groupForm.get('groupName')?.hasError('minlength')">Au moins 3 caractères.</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div style="margin-bottom: 20px;">
+            <mat-label class="f-w-600 m-b-8 d-block">Superviseur</mat-label>
+            <mat-form-field appearance="outline" class="w-100">
+               <mat-select formControlName="supervisor">
+                <mat-option *ngFor="let supervisor of supervisors" [value]="supervisor.id">
+                {{ supervisor.nom }} {{ supervisor.prenom }}
+              </mat-option>
+            </mat-select>
+            
+            <mat-error *ngIf="groupForm.get('supervisor')?.invalid">
+              Veuillez sélectionner un superviseur.
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="button-group" style="display: flex; justify-content: space-between; margin-top: 20px;">
+          <button mat-raised-button color="primary" type="submit">
+            {{ groupId ? 'Modifier' : 'Ajouter' }}
+          </button>
+          <button mat-raised-button color="warn" type="button" (click)="toggleForm()">
+            Annuler
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  

@@ -1,0 +1,33 @@
+
+  
+  .title-style {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .content-style {
+    padding: 15px;
+  }
+  
+  .custom-table {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .header-cell {
+    font-weight: bold;
+    font-size: 14px;
+    background: #eeeeee;
+  }
+  
+  .mat-icon {
+    cursor: pointer;
+  }
+  
+  button.mat-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  

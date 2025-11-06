@@ -1,0 +1,95 @@
+<mat-card class="cardWithShadow theme-card">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Profil</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="b-t-1">
+    <div *ngIf="!isEditing">
+      <mat-list>
+        <mat-list-item><strong>ID:</strong> {{ user.id }}</mat-list-item>
+        <mat-list-item><strong>CIN:</strong> {{ user.cin }}</mat-list-item>
+        <mat-list-item><strong>Nom:</strong> {{ user.nom }}</mat-list-item>
+        <mat-list-item><strong>Prénom:</strong> {{ user.prenom }}</mat-list-item>
+        <mat-list-item><strong>Genre:</strong> {{ user.genre }}</mat-list-item>
+        <mat-list-item><strong>Date de naissance:</strong> {{ user.dateNaissance | date:'dd/MM/yyyy' }}</mat-list-item>
+        <mat-list-item><strong>Adresse:</strong> {{ user.adresse }}</mat-list-item>
+        <mat-list-item><strong>Email:</strong> {{ user.email }}</mat-list-item>
+        <mat-list-item><strong>Téléphone:</strong> {{ user.telephone }}</mat-list-item>
+      </mat-list>
+
+      <div class="m-t-12">
+        <button mat-flat-button color="primary" class="m-r-8" (click)="toggleEdit()">Modifier</button>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-content *ngIf="isEditing">
+    <form [formGroup]="userForm" (ngSubmit)="saveChanges()">
+      <div class="row">
+        <div class="col-lg-6 col-md-12">
+          <mat-label class="f-w-600 m-b-8 d-block">CIN</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput formControlName="cin" required />
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+          <mat-label class="f-w-600 m-b-8 d-block">Nom</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput formControlName="nom" required />
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+          <mat-label class="f-w-600 m-b-8 d-block">Prénom</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput formControlName="prenom" required />
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+          <mat-label class="f-w-600 m-b-8 d-block">Genre</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select formControlName="genre">
+              <mat-option value="Femme">Femme</mat-option>
+              <mat-option value="Homme">Homme</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+          <mat-label class="f-w-600 m-b-8 d-block">Date de naissance</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput type="date" formControlName="dateNaissance" required />
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+          <mat-label class="f-w-600 m-b-8 d-block">Adresse</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput formControlName="adresse" placeholder="Adresse" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+          <mat-label class="f-w-600 m-b-8 d-block">Numéro de téléphone</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput formControlName="telephone" placeholder="Téléphone" />
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+          <mat-label class="f-w-600 m-b-8 d-block">Email</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput type="email" formControlName="email" placeholder="Email" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="m-t-12">
+        <button mat-flat-button color="primary" type="submit" class="m-r-8">Sauvegarder</button>
+        <button mat-stroked-button color="warn" type="button" (click)="toggleEdit()">Annuler</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

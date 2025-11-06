@@ -1,0 +1,46 @@
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  
+    button {
+      margin: 0 10px;
+    }
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  mat-chip {
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 5px 10px;
+  }
+  
+  .status-processing {
+    background-color: #f8ec67 !important; // Orange
+    color: white !important;
+  }
+  
+  .status-approved {
+    background-color: #57cb5c !important; // Vert
+    color: white !important;
+  }
+  
+  .status-rejected {
+    background-color: #e83f3f !important; // Rouge
+    color: white !important;
+  }
+  
+  .status-default {
+    background-color: #607d8b !important; // Gris
+    color: white !important;
+  }
+  
+  

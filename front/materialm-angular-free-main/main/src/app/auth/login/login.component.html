@@ -1,0 +1,44 @@
+<div class="blank-layout-container justify-content-center align-items-center bg-light">
+  <div class="position-relative row w-100 h-100 bg-gredient justify-content-center">
+    <div class="col-lg-4 d-flex align-items-center">
+      <mat-card class="cardWithShadow boxed-auth">
+        <mat-card-content class="p-32">
+          <div class="text-center">
+            <a [routerLink]="['/dashboard']">
+              <img src="./assets/images/products/logo2.jpg" class="align-middle m-2" alt="logo" />
+            </a>
+          </div>
+
+          <form [formGroup]="loginForm" (ngSubmit)="login()" class="m-t-30">
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Email</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput formControlName="username" />
+              <mat-error *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+                Email invalide
+              </mat-error>
+            </mat-form-field>
+
+            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Mot de passe</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput type="password" formControlName="password" />
+              <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                Mot de passe requis (6 caractères minimum)
+              </mat-error>
+            </mat-form-field>
+
+            <div class="d-flex align-items-center m-b-12">
+              <mat-checkbox color="primary">Se souvenir de moi</mat-checkbox>
+              <a [routerLink]="['/forgot-password']" class="text-primary f-w-600 text-decoration-none m-l-auto f-s-14">
+                Mot de passe oublié ?
+              </a>
+            </div>
+
+            <button mat-flat-button color="primary" class="w-100" >
+              Se connecter
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

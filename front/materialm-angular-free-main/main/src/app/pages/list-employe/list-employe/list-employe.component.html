@@ -1,0 +1,63 @@
+<mat-card class="cardWithShadow theme-card">
+      <mat-card-header>
+        <mat-card-title class="m-b-0">Liste des Employes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource" class="w-100">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">ID</th>
+            <td mat-cell *matCellDef="let employe">{{ employe.id }}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="cin">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">CIN</th>
+            <td mat-cell *matCellDef="let employe">{{ employe.cin }}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Nom</th>
+            <td mat-cell *matCellDef="let employe">{{ employe.nom }}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="prenom">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Prénom</th>
+            <td mat-cell *matCellDef="let employe">{{ employe.prenom }}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="adresseMail">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Adresse mail</th>
+            <td mat-cell *matCellDef="let employe">{{ employe.adresseMail }}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Rôle</th>
+            <td mat-cell *matCellDef="let employe">{{ employe.role }}</td>
+          </ng-container>
+        
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="header-cell"></th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon color="primary">more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="onEditUser(element.id)">
+                  <mat-icon color="accent">edit</mat-icon>
+                  <span>Modifier</span>
+                </button>
+                <button mat-menu-item (click)="confirmDelete(element.id)">
+                  <mat-icon color="warn">delete</mat-icon>
+                  <span>Supprimer</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>       
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>      
+      </div>
+      </mat-card-content>
+  </mat-card>
+  

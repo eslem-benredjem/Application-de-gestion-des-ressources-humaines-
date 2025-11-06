@@ -1,0 +1,18 @@
+<div *ngIf="isAdmin">
+  <div class="row">
+    <div class="col-lg-8">
+      <app-popular-products></app-popular-products>
+    </div>
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-12">
+          <app-total-followers></app-total-followers>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isAdmin" class="text-center">
+  <p>Redirection en cours...</p>
+</div>
